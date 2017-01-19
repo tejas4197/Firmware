@@ -6,7 +6,7 @@ set(CMAKE_TOOLCHAIN_FILE ${PX4_SOURCE_DIR}/cmake/toolchains/Toolchain-arm-none-e
 
 set(config_uavcan_num_ifaces 2)
 
-set(config_module_list
+set(general_modules_section1
 	#
 	# Board support modules
 	#
@@ -97,15 +97,9 @@ set(config_module_list
 	modules/gpio_led
 	modules/uavcan
 	modules/land_detector
+)
 
-	#
-	# Estimation modules
-	#
-	#modules/attitude_estimator_q
-	#modules/position_estimator_inav
-	#modules/local_position_estimator
-	#modules/ekf2
-
+set(general_modules_section2
 	#
 	# Vehicle Control
 	#
@@ -185,6 +179,12 @@ set(config_module_list
 
 	# Hardware test
 	#examples/hwtest
+)
+
+set(config_module_list
+	${general_modules_section1}
+	${estimation_modules}
+	${general_modules_section2}
 )
 
 set(config_extra_builtin_cmds
