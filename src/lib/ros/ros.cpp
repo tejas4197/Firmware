@@ -178,19 +178,18 @@ Subscriber::Subscriber(CallbackInterface *cb) :
 	}
 }
 
+Subscriber &Subscriber::operator=(const Subscriber &sub)
+{
+	_callbackPtr = sub._callbackPtr;
+	return *this;
+}
+
 Subscriber::~Subscriber()
 {
 	if (_callbackPtr != NULL) {
 		delete _callbackPtr;
 		_callbackPtr = NULL;
 	}
-}
-
-
-Subscriber &Subscriber::operator=(const Subscriber &sub)
-{
-	_callbackPtr = sub._callbackPtr;
-	return *this;
 }
 
 void Subscriber::callback()
@@ -211,6 +210,17 @@ Publisher::Publisher() :
 Publisher::Publisher(uORB::PublicationTiny *pub) :
 	_pub(pub)
 {
+}
+
+Publisher::Publisher(const Publisher &other) :
+	_pub(other._pub)
+{
+};
+
+Publisher &Publisher::operator=(const Publisher &other)
+{
+	_pub = other._pub;
+	return *this;
 }
 
 Publisher::~Publisher()
